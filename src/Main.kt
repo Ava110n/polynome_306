@@ -70,38 +70,36 @@ open class Polynome {
 operator fun Double.times(p: Polynome) = p.times(this)
 operator fun Int.times(p: Polynome) = p.times(this)
 
-class Lagrange:Polynome{
-
+class Lagrange: Polynome{
     var points: DoubleArray
-
-    constructor(points: DoubleArray){
+    constructor(points: DoubleArray) {
         this.points = points
         this.coeffs = calculate().coeffs
         this.degree = this.coeffs.size - 1
     }
 
-    fun calculate():Polynome{
-        var p = Polynome(doubleArrayOf(0.0))
-        for(i in 0 until points.size)
-            p += basis_polynome(i) * function(points[i])
-        return p
+    fun calculate(): Polynome {
+        var lizapro = Polynome(doubleArrayOf(0.0))
+            for (i in 0.. points.size-1){
+            lizapro += basis_polynome(i)*(function(points[i]))
+        }
+        return lizapro
     }
-    fun basis_polynome(i: Int):Polynome{
-        var p = Polynome(doubleArrayOf(1.0))
-        for(j in 0 until points.size)
-            if(j != i)
-                p *= Polynome(doubleArrayOf(-points[j]/(points[i]-points[j]), 1/(points[i]-points[j])))
-        return p
+    fun basis_polynome(i: Int): Polynome{
+        var liza = Polynome(doubleArrayOf(1.0))
+        for (j in 0 until points.size ){
+            if(j!=i) {
+                liza *= Polynome(doubleArrayOf(-points[j] / (points[i] - points[j]), 1 / (points[i] - points[j])))
+            }
+        }
+        return liza
     }
+
 
     fun function(x: Double) = sin(x)
-
 }
 
 fun main() {
-    var a = Polynome(doubleArrayOf(1.0, 1.0))
-    var b = Polynome(doubleArrayOf(1.0, 1.0))
-    //var c = a + b
-    //println(c.degree)
-    println(a*b)
+    var nikita = Lagrange(doubleArrayOf(0.0,1.0,2.0))
+    println(nikita)
 }
